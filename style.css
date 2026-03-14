@@ -1,0 +1,107 @@
+:root {
+  --text-sm: 0.9rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+}
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: inherit;
+}
+body {
+  background-color: blue;
+  color: white;
+}
+
+li {
+  list-style-type: none;
+}
+.font-luckiest-guy {
+  font-family: "Luckiest Guy", cursive;
+}
+.font-sour-gummy {
+  font-family: "Sour Gummy", sans-serif;
+  font-optical-sizing: auto;
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-flow: column wrap;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.place-center {
+  place-content: center;
+}
+.place-self-center {
+  place-self: center;
+}
+.text-center {
+  text-align: center;
+}
+.text-sm {
+  font-size: 0.9rem;
+}
+.text-md {
+  font-size: 1.125rem;
+}
+.text-lg {
+  font-size: 1.25rem;
+}
+.text-xl {
+  font-size: 1.5rem;
+}
+.text-2xl {
+  font-size: 2rem;
+}
+.text-3xl {
+  font-size: 3rem;
+}
+.p-1 {
+  padding: 0.5rem;
+}
+.p-2 {
+  padding: 1rem;
+}
+.m-1 {
+  margin: 0.5rem;
+}
+.m-2 {
+  margin: 1rem;
+}
+
+h1 {
+  color: blue;
+  text-shadow: 2px 2px yellow;
+}
+h2 {
+  text-align: center;
+}
+
+.hero-section {
+  background-color: black;
+  min-height: 50vh;
+}
+.pokemon-card {
+  background-color: black;
+  color: blue;
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.pokemon-left-card,
+.pokemon-right-card {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  background-color: yellow;
+}

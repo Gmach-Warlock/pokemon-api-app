@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Pokemon App</title>
+  </head>
+  <body class="font-luckiest-guy">
+    <header class="p-1">
+      <ul class="flex justify-between">
+        <li>
+          <p>logo</p>
+        </li>
+        <li>
+          <form action="/" class="header-search-form">
+            <input
+              type="text"
+              name="header-search-field"
+              class="header-search-field"
+              id="header-search-field"
+              title="header search field"
+              aria-label="header search field"
+              placeholder="Search for Pokemon"
+            />
+            <button
+              type="submit"
+              class="button header-search-button"
+              title="header search button"
+              title="header search button"
+            >
+              Search
+            </button>
+          </form>
+        </li>
+        <li></li>
+      </ul>
+    </header>
+    <main>
+      <section class="hero-section">
+        <h1 class="text-center text-3xl p-2">Poke App</h1>
+        <div class="main-container">
+          <ul class="pokemon-container"></ul>
+        </div>
+      </section>
+    </main>
+    <footer class="text-center">&copy;2026 GMach</footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

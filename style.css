@@ -1,10 +1,21 @@
 :root {
-  --text-sm: 0.9rem;
+  --text-sm: 0.8rem;
   --text-md: 1.125rem;
   --text-lg: 1.25rem;
   --text-xl: 1.5rem;
   --text-2xl: 2rem;
+
+  --primary-hs: 240, 100%;
+  --secondary-hs: 60, 100%;
+
+  --color-primary-500: hsl(var(--primary-hs), 50%);
+  --color-secondary-500: hsl(var(--secondary-hs), 50%);
+
+  --font-luckiest-guy: "Luckiest Guy", cursive;
+  --font-sour-gummy: "Sour Gummy", sans-serif;
 }
+
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -13,95 +24,108 @@
   font-size: inherit;
 }
 body {
-  background-color: blue;
-  color: white;
+  background-color: var(--color-primary-500);
+  color: hsl(var(--secondary-hs), 50%);
+  font-family: var(--font-luckiest-guy);
 }
 
-li {
-  list-style-type: none;
-}
-.font-luckiest-guy {
-  font-family: "Luckiest Guy", cursive;
-}
-.font-sour-gummy {
-  font-family: "Sour Gummy", sans-serif;
-  font-optical-sizing: auto;
-}
-.flex {
-  display: flex;
-}
-.flex-column {
-  display: flex;
-  flex-flow: column wrap;
-}
-.justify-between {
-  justify-content: space-between;
-}
-.place-center {
-  place-content: center;
-}
-.place-self-center {
-  place-self: center;
-}
-.text-center {
-  text-align: center;
-}
-.text-sm {
-  font-size: 0.9rem;
-}
-.text-md {
-  font-size: 1.125rem;
-}
-.text-lg {
-  font-size: 1.25rem;
-}
-.text-xl {
-  font-size: 1.5rem;
-}
-.text-2xl {
-  font-size: 2rem;
-}
-.text-3xl {
-  font-size: 3rem;
-}
-.p-1 {
+/* Block: Page */
+.page__header {
   padding: 0.5rem;
 }
-.p-2 {
+.page__title {
+  font-size: var(--text-2xl);
   padding: 1rem;
-}
-.m-1 {
-  margin: 0.5rem;
-}
-.m-2 {
-  margin: 1rem;
-}
-
-h1 {
   color: blue;
   text-shadow: 2px 2px yellow;
 }
-h2 {
+.page__footer {
   text-align: center;
 }
-
-.hero-section {
+.page__title {
+  color: blue;
+  text-shadow: 2px 2px yellow;
+  text-align: center;
+}
+.page__hero {
   background-color: black;
   min-height: 50vh;
 }
-.pokemon-card {
-  background-color: black;
-  color: blue;
-  margin: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+
+/* Block: header */
+.header {
+  padding: 1rem;
 }
 
-.pokemon-left-card,
-.pokemon-right-card {
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.nav__input {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Block: hero */
+.hero__pokemon {
+  list-style-type: none;
+}
+
+/* Block: pokemoon */
+.pokemon__main-container {
+  background-color: blue;
+  color: yellow;
+  margin-block: 1rem;
+}
+.pokemon__title {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: var(--text-2xl);
+}
+.pokemon__card-title {
+  text-align: center;
+  color: var(--color-primary-500);
+  font-size: var(--text-lg);
+  place-self: center;
+}
+.pokemon__card {
   display: flex;
   flex-direction: column;
-  place-content: center;
-  background-color: yellow;
+  place-content: flex-start;
+  background-color: var(--color-secondary-500);
+  color: var(--color-primary-500);
+  margin: 2rem;
+  text-align: center;
+}
+.pokemon img {
+  background-color: black;
+  margin: 2rem;
+  width: 60%;
+  place-self: center;
+}
+.pokemon__height,
+.pokemon__weight,
+.pokemon__move {
+  font-size: var(--text-md);
+}
+
+.pokemon__cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pokemon__cries-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Block: btn */
+
+.btn {
+  background-color: var(--color-secondary-500);
+  color: var(--color-primary-500);
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
 }

@@ -233,6 +233,22 @@ body {
   .nav__logo {
     display: none;
   }
+  .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav__form {
+    gap: 0.1rem;
+    padding-block: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .nav__input {
+    font-size: var(--text-md);
+  }
+
+  .btn {
+    font-size: var(--text-md);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -30,6 +30,17 @@ async function fetchPokemonList(url) {
     console.error(error);
   }
 }
+
+const getAndRenderPokemon = async (url) => {
+  pokemonContainer.innerHTML = "";
+  const pokemonList = await fetchPokemonList(url);
+
+  const fullPokemonData = await Promise.all(
+    pokemonList.map((item) => fetchIndividualPokemon(item.url)),
+  );
+
+  createPokemon(fullPokemonData);
+};
 const triggerBattleEffects = (container) => {
   const cards = container.querySelectorAll(".pokemon__card");
 
@@ -47,7 +58,8 @@ const triggerBattleEffects = (container) => {
   });
 };
 const createPokemon = (array) => {
-  array.forEach(async (item) => {
+  array.forEach((pokeStats) => {
+    if (!pokeStats) return;
     // variables
     const li = document.createElement("li");
     li.className = "pokemon";
@@ -56,12 +68,12 @@ const createPokemon = (array) => {
     pokemonContainer.appendChild(li);
     li.appendChild(liMainContainer);
     const leftCard = document.createElement("div");
-    leftCard.classList = "pokemon__card";
+    leftCard.className = "pokemon__card";
     const rightCard = document.createElement("div");
-    rightCard.classList = "pokemon__card";
+    rightCard.className = "pokemon__card";
     const liH2 = document.createElement("h2");
     liH2.className = "pokemon__title";
-    liH2.textContent = item.name;
+    liH2.textContent = pokeStats.name;
     const cardsContainer = document.createElement("div");
     cardsContainer.className = "pokemon__cards-container";
     const criesContainer = document.createElement("div");
@@ -75,8 +87,6 @@ const createPokemon = (array) => {
     cardsContainer.appendChild(rightCard);
 
     // fetch the rest of the stats
-
-    const pokeStats = await fetchIndividualPokemon(item.url);
 
     // left column
     const liLeftH3 = document.createElement("h3");
@@ -162,8 +172,7 @@ window.addEventListener("load", async (e) => {
   e.preventDefault();
   const randomOffset = Math.floor(Math.random() * 1005);
   const randomURL = `${POKE_URL}?offset=${randomOffset}&limit=10`;
-  const pokemonArray = await fetchPokemonList(randomURL);
-  createPokemon(pokemonArray);
+  getAndRenderPokemon(randomURL);
 });
 
 headerSearchForm.addEventListener("submit", async (e) => {
@@ -173,22 +182,16 @@ headerSearchForm.addEventListener("submit", async (e) => {
 
   if (searchTerms) {
     try {
-      const response = await fetch(searchURL);
-      if (!response.ok) throw new Error("Pokemon not found!");
-      const data = await response.json();
+      const searchUrl = `${POKE_URL}/${searchTerms}`;
+      const data = await fetchIndividualPokemon(searchUrl);
+
+      if (!data) throw new Error("Pokemon not found!");
 
       pokemonContainer.innerHTML = "";
 
-      const resultArray = [
-        {
-          ...data,
-          url: searchURL,
-        },
-      ];
-
-      createPokemon(resultArray);
+      createPokemon([data]);
     } catch (error) {
-      console.error(error);
+      console.log(`We have an error: ${console.error(error)}`);
       alert("Pokemon not found! Check your spelling!");
     }
   } else {
@@ -202,6 +205,5 @@ getPokemonButton.addEventListener("click", async (e) => {
   const randomURL = `${POKE_URL}?offset=${randomOffset}&limit=10`;
 
   pokemonContainer.innerHTML = "";
-  const pokemonArray = await fetchPokemonList(randomURL);
-  createPokemon(pokemonArray);
+  getAndRenderPokemon(randomURL);
 });

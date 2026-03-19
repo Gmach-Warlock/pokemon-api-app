@@ -5,11 +5,23 @@
   --text-xl: 1.5rem;
   --text-2xl: 2rem;
 
+  --white-hs: 0, 0%;
   --primary-hs: 240, 100%;
   --secondary-hs: 60, 100%;
+  --accent-hs: 134, 61%;
 
+  --color-primary-300: hsl(var(--primary-hs), 75%);
   --color-primary-500: hsl(var(--primary-hs), 50%);
+  --color-primary-700: hsl(var(--primary-hs), 25%);
+  --color-primary-900: hsl(var(--primary-hs), 5%);
+  --color-secondary-300: hsl(var(--secondary-hs), 75%);
   --color-secondary-500: hsl(var(--secondary-hs), 50%);
+  --color-secondary-700: hsl(var(--secondary-hs), 25%);
+  --color-secondary-900: hsl(var(--secondary-hs), 5%);
+  --color-accent-300: hsl(var(--accent-hs), 75%);
+  --color-accent-500: hsl(var(--accent-hs), 50%);
+  --color-accent-700: hsl(var(--accent-hs), 25%);
+  --color-accent-900: hsl(var(--accent-hs), 5%);
 
   --font-luckiest-guy: "Luckiest Guy", cursive;
   --font-sour-gummy: "Sour Gummy", sans-serif;
@@ -24,31 +36,30 @@
   font-size: inherit;
 }
 body {
-  background-color: var(--color-primary-500);
-  color: hsl(var(--secondary-hs), 50%);
+  background-color: black;
+  color: var(--color-secondary-500);
   font-family: var(--font-luckiest-guy);
 }
 
 /* Block: Page */
-.page__header {
+.header {
   padding: 0.5rem;
+  background-color: var(--color-primary-500);
 }
 .page__title {
   font-size: var(--text-2xl);
   padding: 1rem;
-  color: blue;
-  text-shadow: 2px 2px yellow;
+  color: var(--color-primary-500);
+  background-color: black;
+  text-shadow: 2px 2px var(--color-secondary-500);
+  text-align: center;
 }
 .page__footer {
   text-align: center;
 }
-.page__title {
-  color: blue;
-  text-shadow: 2px 2px yellow;
-  text-align: center;
-}
+
 .page__hero {
-  background-color: black;
+  background-color: var(--color-primary-500);
   min-height: 50vh;
 }
 
@@ -63,6 +74,11 @@ body {
   list-style-type: none;
 }
 
+/* Block: nav */
+.nav__form {
+  display: flex;
+  gap: 0.5rem;
+}
 .nav__input {
   padding: 0.15rem 0.5rem;
   border-radius: 0.25rem;
@@ -75,52 +91,76 @@ body {
 
 /* Block: pokemoon */
 .pokemon__main-container {
-  background-color: blue;
-  color: yellow;
+  background-color: transparent;
   margin-block: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid black;
 }
 .pokemon__title {
   text-align: center;
-  padding-top: 2rem;
   font-size: var(--text-2xl);
+  text-shadow: 2px 2px 4px black;
 }
 .pokemon__card-title {
   text-align: center;
-  color: var(--color-primary-500);
+  /* Match the dark text of the card */
+  color: hsl(var(--primary-hs), 45%);
   font-size: var(--text-lg);
-  place-self: center;
+  margin-top: 1rem;
 }
 .pokemon__card {
   display: flex;
   flex-direction: column;
   place-content: flex-start;
-  background-color: var(--color-secondary-500);
-  color: var(--color-primary-500);
+  position: relative;
+  overflow: hidden;
+  background-color: hsla(var(--secondary-hs), 50%, 0.75);
+  color: hsl(var(--primary-hs), 45%);
   margin: 2rem;
   text-align: center;
+  border-radius: 1rem; /* Softer corners look better with glass */
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsla(var(--secondary-hs), 50%, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  cursor: pointer; /* Makes it feel interactable */
 }
 .pokemon img {
   background-color: black;
   margin: 2rem;
-  width: 60%;
+  width: 70%;
   place-self: center;
+  border-radius: 0.25rem;
 }
 .pokemon__height,
 .pokemon__weight,
 .pokemon__move {
   font-size: var(--text-md);
 }
-
 .pokemon__cards-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-
 .pokemon__cries-container {
   display: flex;
   justify-content: center;
 }
 
+.pokemon__cry-audio:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.pokemon__cry-audio:hover {
+  transform: translateY(-5px) scale(1.02);
+  /* Slightly brighter/more opaque */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-color: white; /* Give it a 'gleam' edge */
+}
 /* Block: btn */
 
 .btn {
@@ -128,4 +168,97 @@ body {
   color: var(--color-primary-500);
   padding: 0.15rem 0.5rem;
   border-radius: 0.25rem;
+}
+.btn:hover {
+  background-color: var(--color-accent-500);
+  color: white;
+}
+.btn:focus {
+  background-color: var(--color-accent-500);
+  color: white;
+  border: 2px solid var(--color-accent-700);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+.btn:active {
+  background-color: white;
+  color: var(--color-accent-500);
+  box-shadow: 0 0 15px var(--color-accent-500);
+  transform: translateY(2px); /* Moves down slightly */
+}
+/* animations */
+
+.glare-swipe {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%; /* Wider for a bigger 'slash' */
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    /* Brighter for the attack feel */ transparent
+  );
+  transform: skewX(-30deg);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes earthquake {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-8px, 4px);
+  }
+  50% {
+    transform: translate(8px, -4px);
+  }
+  75% {
+    transform: translate(-4px, 2px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Media Queries */
+
+@media (max-width: 430px) {
+  .pokemon__cards-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav__logo {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glare-swipe {
+    animation: glare-swipe 2s ease-in 1s forwards;
+  }
+  .shake-trigger {
+    animation: earthquake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+}
+
+/* 10. Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-primary-900);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-500);
+  border: 2px solid var(--color-primary-900);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-active-500);
+  cursor: grab;
 }

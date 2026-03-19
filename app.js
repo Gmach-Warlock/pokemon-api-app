@@ -30,6 +30,22 @@ async function fetchPokemonList(url) {
     console.error(error);
   }
 }
+const triggerBattleEffects = (container) => {
+  const cards = container.querySelectorAll(".pokemon__card");
+
+  cards.forEach((card) => {
+    card.classList.remove("shake-trigger");
+    void card.offsetWidth;
+    card.classList.add("shake-trigger");
+    const glare = card.querySelector(".glare-swipe");
+
+    if (glare) {
+      glare.style.animation = "none";
+      void glare.offsetWidth;
+      glare.style.animation = "glare-swipe 0.5s ease-in-out forwards";
+    }
+  });
+};
 const createPokemon = (array) => {
   array.forEach(async (item) => {
     // variables
@@ -78,7 +94,7 @@ const createPokemon = (array) => {
     leftCard.appendChild(movesContainer);
 
     const movesTitle = document.createElement("p");
-    movesTitle.textContent = "Moves";
+    movesTitle.textContent = "Moves:";
     movesContainer.appendChild(movesTitle);
 
     pokeStats.abilities.forEach((ability) => {
@@ -105,7 +121,7 @@ const createPokemon = (array) => {
     rightCard.appendChild(statsContainer);
 
     const statsTitle = document.createElement("p");
-    statsTitle.textContent = "Stats";
+    statsTitle.textContent = "Stats:";
     statsTitle.classList = "pokemon__stats-title";
     statsContainer.appendChild(statsTitle);
 
@@ -119,6 +135,14 @@ const createPokemon = (array) => {
     weight.textContent = `Weight: ${pokeStats.weight}`;
     statsContainer.appendChild(weight);
 
+    const leftGlare = document.createElement("div");
+    leftGlare.className = "glare-swipe";
+    leftCard.appendChild(leftGlare);
+
+    const rightGlare = document.createElement("div");
+    rightGlare.className = "glare-swipe";
+    rightCard.appendChild(rightGlare);
+
     // cries
 
     const cryAudio = document.createElement("audio");
@@ -126,15 +150,18 @@ const createPokemon = (array) => {
     cryAudio.src = pokeStats.cries.latest;
     cryAudio.controls = true;
     cryAudio.volume = 0.1;
-
+    cryAudio.addEventListener("play", () => {
+      triggerBattleEffects(liMainContainer);
+    });
     criesContainer.appendChild(cryAudio);
   });
 };
 
+// event listeners
 window.addEventListener("load", async (e) => {
   e.preventDefault();
   const randomOffset = Math.floor(Math.random() * 1005);
-  const randomURL = `${POKE_URL}?offset=${randomOffset}&limit=20`;
+  const randomURL = `${POKE_URL}?offset=${randomOffset}&limit=10`;
   const pokemonArray = await fetchPokemonList(randomURL);
   createPokemon(pokemonArray);
 });
@@ -172,7 +199,7 @@ headerSearchForm.addEventListener("submit", async (e) => {
 getPokemonButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const randomOffset = Math.floor(Math.random() * 1005);
-  const randomURL = `${POKE_URL}?offset=${randomOffset}&limit=20`;
+  const randomURL = `${POKE_URL}?offset=${randomOffset}&limit=10`;
 
   pokemonContainer.innerHTML = "";
   const pokemonArray = await fetchPokemonList(randomURL);

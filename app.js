@@ -67,10 +67,40 @@ const createPokemon = (array) => {
     liMainContainer.className = "pokemon__main-container";
     pokemonContainer.appendChild(li);
     li.appendChild(liMainContainer);
+
+    // set background color according to primary type
+    const primaryType = pokeStats.types[0].type.name;
+    const typeColors = {
+      fire: "var(--type-fire)",
+      water: "var(--type-water)",
+      grass: "var(--type-grass)",
+      electric: "var(--type-electric)",
+      psychic: "var(--type-psychic)",
+      ice: "var(--type-ice)",
+      dragon: "var(--type-dragon)",
+      ghost: "var(--type-ghost)",
+      poison: "var(--type-poison)",
+      ground: "var(--type-ground)",
+      rock: "var(--type-rock)",
+      bug: "var(--type-bug)",
+      normal: "var(--type-normal)",
+      fighting: "var(--type-fighting)",
+      flying: "var(--type-flying)",
+      steel: "var(--type-steel)",
+      fairy: "var(--type-fairy)",
+      dark: "var(--type-dark)",
+    };
+    const cardHue = typeColors[primaryType] || "var(--type-default)";
+
+    // append left and right cards
     const leftCard = document.createElement("div");
     leftCard.className = "pokemon__card";
+    leftCard.style.backgroundColor = `hsla(${cardHue}, 75%, 0.8)`;
     const rightCard = document.createElement("div");
     rightCard.className = "pokemon__card";
+    rightCard.style.backgroundColor = `hsla(${cardHue}, 75%, 0.8)`;
+    leftCard.style.boxShadow = `0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 15px hsla(${cardHue}, 100%, 50%, 0.4)`;
+    rightCard.style.boxShadow = `0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 15px hsla(${cardHue}, 100%, 50%, 0.4)`;
     const liH2 = document.createElement("h2");
     liH2.className = "pokemon__title";
     liH2.textContent = pokeStats.name;

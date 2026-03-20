@@ -10,6 +10,25 @@
   --secondary-hs: 60, 100%;
   --accent-hs: 134, 61%;
 
+  --type-fire: 20, 100%;
+  --type-water: 200, 100%;
+  --type-grass: 110, 100%;
+  --type-electric: 45, 100%;
+  --type-psychic: 330, 100%;
+  --type-ice: 180, 100%;
+  --type-dragon: 260, 100%;
+  --type-ghost: 270, 50%;
+  --type-poison: 290, 80%;
+  --type-ground: 35, 60%;
+  --type-rock: 40, 30%;
+  --type-bug: 75, 90%;
+  --type-normal: 0, 0%;
+  --type-fighting: 0, 75%;
+  --type-flying: 230, 60%;
+  --type-steel: 210, 20%;
+  --type-fairy: 340, 80%;
+  --type-dark: 0, 0%; /* Dark is usually deep gray/black */
+
   --color-primary-300: hsl(var(--primary-hs), 75%);
   --color-primary-500: hsl(var(--primary-hs), 50%);
   --color-primary-700: hsl(var(--primary-hs), 25%);
